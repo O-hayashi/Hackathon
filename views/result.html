@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AES Suraksha | Analysis Result</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="result-page">
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="icon">🛡️</span> AES Suraksha
+    </div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/" class="btn-nav">New Assessment</a>
+    </div>
+  </nav>
+
+  <div class="main-container">
+
+    <div class="result-wrapper">
+      <h2>Risk Analysis Report</h2>
+
+      <div class="score-display" id="risk-display">--%</div>
+      <p id="recommendation-text">Analyzing...</p>
+
+      <div style="position: relative; height: 250px; width: 250px; margin: 0 auto;">
+        <canvas id="riskChart"></canvas>
+      </div>
+
+      <div class="alert-box">
+        <strong>Community Alert:</strong>
+        <span id="case-count">0</span> active cases in your ward.
+      </div>
+    </div>
+
+    <div class="graph-section">
+      <h3>7-Day Infection Trend</h3>
+      <p style="text-align: center; color: #666; margin-bottom: 10px;">New cases reported in your district</p>
+
+      <div style="position: relative; height: 250px; width: 100%; max-width: 600px; margin: 0 auto;">
+        <canvas id="trendChart"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="app-footer">
+    <div class="footer-content">
+      <p><strong>Emergency Contacts:</strong> Ambulance: 102 | AES Hotline: 104</p>
+      <p class="disclaimer">This is an algorithmic assessment, not a doctor's diagnosis. Visit a hospital if symptoms
+        persist.</p>
+    </div>
+  </footer>
+
+  <script src="/js/visualization.js"></script>
+  <script>
+    // Simple Text Updates
+    const params = new URLSearchParams(window.location.search);
+    const score = params.get('score') || 0;
+    const cases = params.get('cases') || 0;
+
+    document.getElementById('risk-display').innerText = score + "%";
+    document.getElementById('case-count').innerText = cases;
+
+    const displayText = document.getElementById('recommendation-text');
+    if (score > 70) {
+      displayText.innerText = "CRITICAL: Seek immediate hospitalization.";
+      displayText.style.color = "#dc2626"; // Red
+    } else if (score > 40) {
+      displayText.innerText = "MODERATE: Consult a doctor immediately.";
+      displayText.style.color = "#d97706"; // Orange
+    } else {
+      displayText.innerText = "LOW: Monitor symptoms.";
+      displayText.style.color = "#16a34a"; // Green
+    }
+  </script>
+</body>
+
+</html>

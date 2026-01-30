@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AES Tracker | Symptom Check</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <nav>
+    <span>AES Tracker</span>
+    <a href="/">Logout</a>
+  </nav>
+
+  <div class="container">
+    <h2>Symptom Assessment</h2>
+    <p class="warning">Warning: If the patient is unconscious, call 102 immediately.</p>
+
+    <form action="/calculate-risk" method="POST">
+
+      <div class="card">
+        <h3>1. Patient Age</h3>
+        <label>
+          <input type="radio" name="age_group" value="child" required> Under 15 Years
+        </label>
+        <label>
+          <input type="radio" name="age_group" value="adult"> 15 Years or Older
+        </label>
+      </div>
+
+      <div class="card">
+        <h3>2. Body Temperature</h3>
+        <label>
+          <input type="radio" name="fever" value="high" required> High (>102°F)
+        </label>
+        <label>
+          <input type="radio" name="fever" value="moderate"> Moderate (99°F - 101°F)
+        </label>
+        <label>
+          <input type="radio" name="fever" value="normal"> Normal
+        </label>
+      </div>
+
+      <div class="card">
+        <h3>3. Neurological Signs</h3>
+        <label>
+          <input type="checkbox" name="symptoms" value="convulsions"> Convulsions / Seizures
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" name="symptoms" value="confusion"> Mental Confusion
+        </label>
+      </div>
+
+      <div class="card">
+        <h3>4. Dietary History</h3>
+        <p>Did the patient consume Litchi fruit in the last 24 hours on an empty stomach?</p>
+        <label>
+          <input type="radio" name="litchi_history" value="yes" required> Yes
+        </label>
+        <label>
+          <input type="radio" name="litchi_history" value="no"> No
+        </label>
+      </div>
+
+      <button type="submit" class="btn-danger">Calculate Risk</button>
+    </form>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AES Suraksha | Health Shield</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+  <header class="app-header">
+    <div class="logo-area">
+      <span class="shield-icon">🛡️</span>
+      <h1>AES Suraksha Setu</h1>
+    </div>
+    <div class="tagline">Public Health Welfare Initiative</div>
+  </header>
+
+  <main class="dashboard-grid">
+
+    <section class="card login-card">
+      <div class="status-indicator">
+        <h2>Health Status Check</h2>
+        <p>Monitor your family's safety against AES.</p>
+      </div>
+
+      <form action="/login" method="POST">
+        <div class="input-group">
+          <label>Mobile Number</label>
+          <input type="tel" name="phone" placeholder="+91 98765 43210" required>
+        </div>
+
+        <div class="input-group">
+          <label>Ward / Zip Code</label>
+          <input type="text" name="zipcode" placeholder="e.g. 842001" required>
+        </div>
+
+        <button type="submit" class="btn-assess">
+          <span>Assess Your Health</span>
+          <span>➔</span>
+        </button>
+      </form>
+      <p style="text-align: center; font-size: 0.8rem; color: #ccc; margin-top: 15px;">Your data is encrypted.</p>
+    </section>
+
+    <section class="card info-card">
+      <h3>Why Use AES Suraksha?</h3>
+      <ul class="feature-list">
+        <li>
+          <span class="icon">📡</span>
+          <div>
+            <strong>Bluetooth-Free Tracking</strong>
+            <p>We use ward-level aggregation to identify hotspots.</p>
+          </div>
+        </li>
+        <li>
+          <span class="icon">📢</span>
+          <div>
+            <strong>Litchi Season Alerts</strong>
+            <p>Get automated warnings regarding AES spread.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="stats-bar">
+        <div>
+          <strong>1,240</strong>
+          <span>Safe Users</span>
+        </div>
+        <div>
+          <strong>12</strong>
+          <span>Hotspots</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="gov-footer">
+    <p>Stay Home. Stay Safe. | Supported by District Health Department</p>
+  </footer>
+
+</body>
+
+</html>
