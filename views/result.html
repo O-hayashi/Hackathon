@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AES Suraksha | Analysis Result</title>
+  <title>Chamki-Suraksha | Analysis Result</title>
   <link rel="stylesheet" href="/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -13,10 +13,15 @@
 
   <nav class="navbar">
     <div class="nav-brand">
-      <span class="icon">🛡️</span> AES Suraksha
+      <span class="icon">🛡️</span> Chamki-Suraksha
     </div>
     <div class="nav-links">
       <a href="/">Home</a>
+      <a href="/precautions">Precautions</a>
+
+      <a href="/emergency" id="emergency-nav-link" style="display: none; color: #d32f2f; font-weight:bold;">Emergency
+        Info</a>
+
       <a href="/" class="btn-nav">New Assessment</a>
     </div>
   </nav>
@@ -60,14 +65,29 @@
 
   <script src="/js/visualization.js"></script>
   <script>
-    // Simple Text Updates
+    // Parse URL Parameters
     const params = new URLSearchParams(window.location.search);
     const score = params.get('score') || 0;
     const cases = params.get('cases') || 0;
 
+    // Update UI
     document.getElementById('risk-display').innerText = score + "%";
     document.getElementById('case-count').innerText = cases;
 
+    // --- NEW LOGIC: SHOW EMERGENCY LINK IF RISK IS HIGH ---
+    // We define "Positive" as Moderate (>40%) or Critical (>70%)
+    if (score > 40) {
+      const emergencyLink = document.getElementById('emergency-nav-link');
+      emergencyLink.style.display = "inline"; // Reveal the link
+
+      // Optional: Add a subtle animation or highlight
+      emergencyLink.style.border = "1px solid #d32f2f";
+      emergencyLink.style.padding = "5px 10px";
+      emergencyLink.style.borderRadius = "5px";
+      emergencyLink.style.backgroundColor = "#fff5f5";
+    }
+
+    // Dynamic Text & Color
     const displayText = document.getElementById('recommendation-text');
     if (score > 70) {
       displayText.innerText = "CRITICAL: Seek immediate hospitalization.";

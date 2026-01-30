@@ -4,39 +4,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AES Suraksha | Health Shield</title>
+  <title>Chamki-Suraksha | Health Shield</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
 
-  <header class="app-header">
-    <div class="logo-area">
-      <span class="shield-icon">🛡️</span>
-      <h1>AES Suraksha Setu</h1>
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="icon">🛡️</span> Chamki-Suraksha
     </div>
-    <div class="tagline">Public Health Welfare Initiative</div>
+    <div class="nav-links">
+      <a href="/" style="color: #3b82f6; font-weight: bold;">Home</a>
+      <a href="/precautions">Precautions</a>
+      <a href="/emergency" style="color: #d32f2f; font-weight:bold;">Emergency Info</a>
+    </div>
+  </nav>
+
+  <header class="app-header">
+    <div class="header-content">
+      <div class="header-left">
+        <div class="logo-area">
+          <h1>Chamki-Suraksha Setu</h1>
+        </div>
+        <div class="tagline">Public Health Welfare Initiative</div>
+      </div>
+
+      <div class="weather-widget">
+        <div class="weather-icon" id="w-icon">⛅</div>
+        <div class="weather-info">
+          <span id="w-temp" class="temp">--°C</span>
+          <span class="location">Muzaffarpur</span>
+        </div>
+      </div>
+    </div>
   </header>
 
   <main class="dashboard-grid">
-
     <section class="card login-card">
       <div class="status-indicator">
         <h2>Health Status Check</h2>
         <p>Monitor your family's safety against AES.</p>
       </div>
-
       <form action="/login" method="POST">
         <div class="input-group">
           <label>Mobile Number</label>
           <input type="tel" name="phone" placeholder="+91 98765 43210" required>
         </div>
-
         <div class="input-group">
           <label>Ward / Zip Code</label>
           <input type="text" name="zipcode" placeholder="e.g. 842001" required>
         </div>
-
         <button type="submit" class="btn-assess">
           <span>Assess Your Health</span>
           <span>➔</span>
@@ -46,42 +64,77 @@
     </section>
 
     <section class="card info-card">
-      <h3>Why Use AES Suraksha?</h3>
+      <h3>Why Use Chamki-Suraksha?</h3>
       <ul class="feature-list">
-        <li>
-          <span class="icon">📡</span>
-          <div>
-            <strong>Bluetooth-Free Tracking</strong>
-            <p>We use ward-level aggregation to identify hotspots.</p>
+        <li><span class="icon">📡</span>
+          <div><strong>Bluetooth-Free Tracking</strong>
+            <p>We use ward-level aggregation.</p>
           </div>
         </li>
-        <li>
-          <span class="icon">📢</span>
-          <div>
-            <strong>Litchi Season Alerts</strong>
-            <p>Get automated warnings regarding AES spread.</p>
+        <li><span class="icon">📢</span>
+          <div><strong>Litchi Season Alerts</strong>
+            <p>Automated weather warnings.</p>
           </div>
         </li>
       </ul>
-
       <div class="stats-bar">
-        <div>
-          <strong>1,240</strong>
-          <span>Safe Users</span>
-        </div>
-        <div>
-          <strong>12</strong>
-          <span>Hotspots</span>
-        </div>
+        <div><strong>1,240</strong><span>Safe Users</span></div>
+        <div><strong>12</strong><span>Hotspots</span></div>
       </div>
     </section>
-
   </main>
 
   <footer class="gov-footer">
     <p>Stay Home. Stay Safe. | Supported by District Health Department</p>
   </footer>
 
+  <script>
+    const apiKey = "YOUR_API_KEY"; // Keep empty for Demo Mode
+    const city = "Muzaffarpur,in";
+    const demoMode = true;
+
+    async function updateHeaderWeather() {
+      try {
+        let temp;
+
+        // Fetch logic
+        if (apiKey !== "YOUR_API_KEY" && !demoMode) {
+          const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+          const data = await response.json();
+          temp = Math.round(data.main.temp);
+        } else {
+          console.log("Demo Mode: Weather Simulated");
+          temp = 38; // Demo Temp
+        }
+
+        // 1. Update Header UI
+        document.getElementById('w-temp').innerText = temp + "°C";
+
+        // Change icon based on temp
+        const icon = document.getElementById('w-icon');
+        if (temp > 35) icon.innerText = "☀️"; // Hot
+        else if (temp < 20) icon.innerText = "❄️"; // Cold
+        else icon.innerText = "⛅"; // Normal
+
+        // 2. Risk Alert Logic (Still works!)
+        const currentMonth = new Date().getMonth();
+        if (demoMode || (currentMonth === 4 && temp >= 35)) {
+          // Make the weather widget RED if dangerous
+          document.querySelector('.weather-widget').style.background = "rgba(220, 38, 38, 0.25)";
+          document.querySelector('.weather-widget').style.border = "1px solid rgba(255, 255, 255, 0.5)";
+
+          setTimeout(() => {
+            alert(`⚠️ HIGH TEMP ALERT (${temp}°C)\nChamki Fever risk is elevated.`);
+          }, 1500);
+        }
+
+      } catch (error) {
+        console.error("Weather error:", error);
+      }
+    }
+
+    updateHeaderWeather();
+  </script>
 </body>
 
 </html>

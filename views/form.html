@@ -4,68 +4,151 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AES Tracker | Symptom Check</title>
+  <title>Symptom Check | Chamki-Suraksha</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body>
-  <nav>
-    <span>AES Tracker</span>
-    <a href="/">Logout</a>
+<body class="form-page">
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="icon">🛡️</span> Chamki-Suraksha
+    </div>
+    <div class="nav-links">
+      <a href="/">Cancel</a>
+    </div>
   </nav>
 
-  <div class="container">
-    <h2>Symptom Assessment</h2>
-    <p class="warning">Warning: If the patient is unconscious, call 102 immediately.</p>
+  <div class="form-container">
+    <div class="form-header">
+      <h1>Patient Assessment</h1>
+      <p>Please answer accurately. This determines the urgency of care.</p>
+    </div>
 
-    <form action="/calculate-risk" method="POST">
+    <form action="/calculate-risk" method="POST" id="aesForm">
 
-      <div class="card">
-        <h3>1. Patient Age</h3>
-        <label>
-          <input type="radio" name="age_group" value="child" required> Under 15 Years
-        </label>
-        <label>
-          <input type="radio" name="age_group" value="adult"> 15 Years or Older
-        </label>
+      <div class="question-group">
+        <span class="step-label">Step 1: The Patient</span>
+
+        <div class="input-card">
+          <label class="question-title">Patient Age Group</label>
+          <div class="radio-grid">
+            <label class="custom-radio">
+              <input type="radio" name="age_group" value="child" required>
+              <div class="radio-box">
+                <span>👶 Child (&lt;15 yrs)</span>
+              </div>
+            </label>
+            <label class="custom-radio">
+              <input type="radio" name="age_group" value="adult">
+              <div class="radio-box">
+                <span>👨 Adult (&ge;15 yrs)</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="input-card">
+          <label class="question-title">Current Body Temperature</label>
+          <div class="radio-grid">
+            <label class="custom-radio">
+              <input type="radio" name="fever" value="high" required>
+              <div class="radio-box">🔥 High (>102°F)</div>
+            </label>
+            <label class="custom-radio">
+              <input type="radio" name="fever" value="moderate">
+              <div class="radio-box">🤒 Moderate</div>
+            </label>
+            <label class="custom-radio">
+              <input type="radio" name="fever" value="normal">
+              <div class="radio-box">😊 Normal</div>
+            </label>
+          </div>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>2. Body Temperature</h3>
-        <label>
-          <input type="radio" name="fever" value="high" required> High (>102°F)
-        </label>
-        <label>
-          <input type="radio" name="fever" value="moderate"> Moderate (99°F - 101°F)
-        </label>
-        <label>
-          <input type="radio" name="fever" value="normal"> Normal
-        </label>
+      <div class="question-group">
+        <span class="step-label">Step 2: Critical Signs</span>
+        <p class="helper-text">Select all that apply to the patient currently:</p>
+
+        <div class="checkbox-list">
+          <label class="custom-checkbox">
+            <input type="checkbox" name="symptoms" value="convulsions">
+            <div class="check-box-ui">
+              <strong>⚡ Convulsions / Seizures</strong>
+              <small>Jerking movements or fits</small>
+            </div>
+          </label>
+
+          <label class="custom-checkbox">
+            <input type="checkbox" name="symptoms" value="unconscious">
+            <div class="check-box-ui">
+              <strong>😴 Unconsciousness / Drowsy</strong>
+              <small>Hard to wake up or confused</small>
+            </div>
+          </label>
+
+          <label class="custom-checkbox">
+            <input type="checkbox" name="symptoms" value="vomiting">
+            <div class="check-box-ui">
+              <strong>🤮 Vomiting</strong>
+              <small>Repeated vomiting in last 24h</small>
+            </div>
+          </label>
+
+          <label class="custom-checkbox">
+            <input type="checkbox" name="symptoms" value="stiff_neck">
+            <div class="check-box-ui">
+              <strong>🧱 Stiff Neck</strong>
+              <small>Pain when bending neck forward</small>
+            </div>
+          </label>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>3. Neurological Signs</h3>
-        <label>
-          <input type="checkbox" name="symptoms" value="convulsions"> Convulsions / Seizures
-        </label>
-        <br>
-        <label>
-          <input type="checkbox" name="symptoms" value="confusion"> Mental Confusion
-        </label>
+      <div class="question-group">
+        <span class="step-label">Step 3: History</span>
+
+        <div class="input-card">
+          <label class="question-title">Did the patient miss dinner last night?</label>
+          <p class="sub-label">(Hypoglycemia Risk Factor)</p>
+          <div class="radio-grid">
+            <label class="custom-radio">
+              <input type="radio" name="missed_meal" value="yes" required>
+              <div class="radio-box">Yes</div>
+            </label>
+            <label class="custom-radio">
+              <input type="radio" name="missed_meal" value="no">
+              <div class="radio-box">No</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="input-card">
+          <label class="question-title">Litchi Consumption (Last 24h)?</label>
+          <div class="radio-grid">
+            <label class="custom-radio">
+              <input type="radio" name="litchi_history" value="yes" required>
+              <div class="radio-box">Yes</div>
+            </label>
+            <label class="custom-radio">
+              <input type="radio" name="litchi_history" value="no">
+              <div class="radio-box">No</div>
+            </label>
+          </div>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>4. Dietary History</h3>
-        <p>Did the patient consume Litchi fruit in the last 24 hours on an empty stomach?</p>
-        <label>
-          <input type="radio" name="litchi_history" value="yes" required> Yes
-        </label>
-        <label>
-          <input type="radio" name="litchi_history" value="no"> No
-        </label>
-      </div>
+      <div style="height: 100px;"></div>
 
-      <button type="submit" class="btn-danger">Calculate Risk</button>
+      <div class="sticky-footer">
+        <div class="footer-wrapper">
+          <p>By clicking below, you agree this is an automated check.</p>
+          <button type="submit" class="btn-assess btn-large">
+            Calculate Risk Score ➔
+          </button>
+        </div>
+      </div>
     </form>
   </div>
 </body>

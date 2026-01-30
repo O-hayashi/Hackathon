@@ -1,12 +1,15 @@
+/* =========================================
+   1. GLOBAL VARIABLES & RESET
+   ========================================= */
 :root {
   --brand-green: #2ecc71;
-  /* Safe */
+  /* Aarogya Setu Green */
   --brand-orange: #f39c12;
-  /* Warning */
-  --brand-red: #dc2626;
-  /* Critical */
+  /* Warning Orange */
+  --brand-red: #ef4444;
+  /* Critical Red */
   --brand-blue: #34495e;
-  /* Text */
+  /* Dark Text */
   --bg-light: #f4f6f7;
   --white: #ffffff;
   --shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
@@ -18,14 +21,12 @@ body {
   color: var(--brand-blue);
   margin: 0;
   padding: 0;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
-/* --- SHARED COMPONENTS --- */
-
-/* Navbar (Used on Result Page) */
+/* Common Navbar (Used in Form & Result) */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -47,18 +48,25 @@ body {
 .nav-links a {
   text-decoration: none;
   color: #666;
-  margin-left: 20px;
   font-weight: 500;
+  margin-inline: 5px;
+
 }
 
-.nav-links .btn-nav {
-  background: #3b82f6;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
+/* Common Footer */
+.app-footer,
+.gov-footer {
+  background: #1f2937;
+  color: #9ca3af;
+  text-align: center;
+  padding: 2rem;
+  margin-top: auto;
+  font-size: 0.85rem;
 }
 
-/* Header (Used on Homepage) */
+/* =========================================
+   2. HOMEPAGE STYLES (Aarogya Setu Look)
+   ========================================= */
 .app-header {
   background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%);
   color: white;
@@ -81,25 +89,6 @@ body {
   font-size: 1.5rem;
 }
 
-.tagline {
-  margin-top: 5px;
-  opacity: 0.9;
-  font-size: 0.9rem;
-}
-
-/* Footer */
-.app-footer,
-.gov-footer {
-  background: #1f2937;
-  color: #9ca3af;
-  text-align: center;
-  padding: 2rem;
-  margin-top: auto;
-  font-size: 0.85rem;
-}
-
-/* --- HOMEPAGE SPECIFIC STYLES --- */
-
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -111,25 +100,14 @@ body {
   box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
+/* Homepage Cards */
 .card {
   background: var(--white);
   border-radius: 16px;
   padding: 2rem;
   box-shadow: var(--shadow);
-  transition: transform 0.2s;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-}
-
-/* Login Card Components */
 .status-indicator {
   border-left: 5px solid var(--brand-green);
   padding-left: 15px;
@@ -141,11 +119,7 @@ body {
   color: var(--brand-green);
 }
 
-.status-indicator p {
-  margin: 5px 0 0;
-  color: #7f8c8d;
-}
-
+/* Homepage Form Inputs */
 .input-group {
   margin-bottom: 1.5rem;
 }
@@ -154,7 +128,6 @@ body {
   display: block;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: #2c3e50;
 }
 
 .input-group input {
@@ -162,13 +135,7 @@ body {
   padding: 12px;
   border: 2px solid #ecf0f1;
   border-radius: 8px;
-  font-size: 1rem;
   box-sizing: border-box;
-}
-
-.input-group input:focus {
-  border-color: var(--brand-orange);
-  outline: none;
 }
 
 .btn-assess {
@@ -182,15 +149,9 @@ body {
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  padding-left: 30px;
-  padding-right: 30px;
 }
 
-.btn-assess:hover {
-  background-color: #2c3e50;
-}
-
-/* Info Card Components */
+/* Homepage Info Section */
 .feature-list {
   list-style: none;
   padding: 0;
@@ -200,7 +161,6 @@ body {
   display: flex;
   gap: 15px;
   margin-bottom: 1.5rem;
-  align-items: flex-start;
 }
 
 .feature-list .icon {
@@ -226,8 +186,9 @@ body {
   color: var(--brand-orange);
 }
 
-/* --- RESULT PAGE SPECIFIC STYLES --- */
-
+/* =========================================
+   3. RESULT PAGE STYLES (Charts & Reports)
+   ========================================= */
 .main-container {
   max-width: 700px;
   margin: 40px auto;
@@ -258,6 +219,251 @@ body {
   padding: 15px;
   border-radius: 8px;
   margin-top: 20px;
-  font-size: 0.95rem;
   border: 1px solid #ffeeba;
+}
+
+/* =========================================
+   4. FORM PAGE STYLES (Wizard Look)
+   ========================================= */
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-header h1 {
+  color: #1e293b;
+  margin-bottom: 5px;
+}
+
+.form-header p {
+  color: #64748b;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.question-group {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  margin-bottom: 25px;
+  border: 1px solid #e2e8f0;
+}
+
+.step-label {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #3b82f6;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+/* Custom Radio Tiles */
+.radio-grid {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.custom-radio input,
+.custom-checkbox input {
+  display: none;
+}
+
+.radio-box {
+  padding: 12px 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #64748b;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.custom-radio input:checked+.radio-box {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+  color: #3b82f6;
+}
+
+/* Custom Checkbox List */
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.check-box-ui {
+  padding: 15px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-checkbox input:checked+.check-box-ui {
+  border-color: var(--brand-red);
+  background-color: #fef2f2;
+  color: #b91c1c;
+}
+
+/* Sticky Footer */
+.sticky-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  padding: 15px 20px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.footer-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.btn-large {
+  width: 100%;
+  font-size: 1.2rem;
+  padding: 16px;
+  background: #1e293b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* --- PRECAUTIONS PAGE STYLES --- */
+
+.precautions-page {
+  background: #f4f6f8;
+  display: flex;
+  flex-direction: column;
+}
+
+.center-wrapper {
+  flex-grow: 1;
+  /* Takes up remaining space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.precautions-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  /* Limits width on large screens */
+  padding: 20px;
+  text-align: center;
+}
+
+.precautions-card h2 {
+  color: #d32f2f;
+  margin-bottom: 15px;
+}
+
+.precautions-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.precautions-card ul li {
+  background: #ffebee;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 6px;
+  border-left: 5px solid #d32f2f;
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.precautions-card ul li strong {
+  color: #b71c1c;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* Highlight for active link in navbar */
+.active-link {
+  color: #3b82f6 !important;
+  font-weight: 700 !important;
+}
+
+/* --- HEADER WEATHER UPDATE --- */
+
+.app-header {
+  /* Keep your existing gradient */
+  background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%);
+  color: white;
+  padding: 1rem 2rem;
+  /* Slightly less padding to fit everything */
+}
+
+/* Container to split Left and Right */
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Left side (Logo + Tagline) */
+.header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Right side (The New Widget) */
+.weather-widget {
+  background: rgba(255, 255, 255, 0.2);
+  /* Glass effect */
+  backdrop-filter: blur(5px);
+  padding: 8px 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.weather-icon {
+  font-size: 1.8rem;
+}
+
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  line-height: 1.1;
+}
+
+.weather-info .temp {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.weather-info .location {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
